@@ -1,0 +1,19 @@
+{% extends 'inventario/base.html' %}
+{% block contenido %}
+<h2>Buscar Repuesto</h2>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if resultados %}
+    <h3>Resultados:</h3>
+    <ul>
+        {% for repuesto in resultados %}
+            <li>{{ repuesto.nombre }} - {{ repuesto.marca }} - ${{ repuesto.precio }}</li>
+        {% empty %}
+            <li>No se encontraron repuestos.</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

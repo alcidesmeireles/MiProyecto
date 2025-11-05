@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Repuestos Autos{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Administración de Repuestos de Autos</h1>
+        <nav>
+            <a href="{% url 'inicio' %}">Inicio</a> |
+            <a href="{% url 'agregar_marca' %}">Agregar Marca</a> |
+            <a href="{% url 'agregar_repuesto' %}">Agregar Repuesto</a> |
+            <a href="{% url 'agregar_cliente' %}">Agregar Cliente</a> |
+            <a href="{% url 'buscar_repuesto' %}">Buscar Repuesto</a>
+        </nav>
+        <hr>
+    </header>
+
+    {% block contenido %}
+    {% endblock %}
+</body>
+</html>
