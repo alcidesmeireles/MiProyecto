@@ -7,6 +7,7 @@ class MarcaForm(forms.ModelForm):
         fields = '__all__'
 
 class RepuestoForm(forms.ModelForm):
+    fecha_ingreso = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), required=False)
     class Meta:
         model = Repuesto
         fields = '__all__'
@@ -17,4 +18,5 @@ class ClienteForm(forms.ModelForm):
         fields = '__all__'
 
 class BuscarRepuestoForm(forms.Form):
-    nombre = forms.CharField(label="Nombre del repuesto", max_length=100)
+    nombre = forms.CharField(label="Nombre del repuesto", max_length=100, required=False)
+

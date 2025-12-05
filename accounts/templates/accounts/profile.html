@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+
+                <h3 class="text-center mb-4">Editar Perfil</h3>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Avatar preview -->
+                    <div class="text-center mb-4">
+                        {% if form.instance.avatar %}
+                            <img src="{{ form.instance.avatar.url }}" 
+                                 class="rounded-circle border shadow-sm mb-3"
+                                 style="width: 120px; height: 120px; object-fit: cover;">
+                        {% else %}
+                            <img src="https://via.placeholder.com/120"
+                                 class="rounded-circle border shadow-sm mb-3">
+                        {% endif %}
+                    </div>
+
+                    <!-- Form fields styled with Bootstrap -->
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary w-100 mt-3">
+                        Guardar cambios
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

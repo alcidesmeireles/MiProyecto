@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca de mí{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Acerca de mí</h2>
+
+    <p>
+        {{ texto }}
+    </p>
+
+    <hr>
+
+    <h3>Sobre el autor</h3>
+    <p>Alcides Meireles — estudiante del curso de Python en CoderHouse. Esta página es la entrega final donde se ponen en práctica los conocimientos adquiridos.</p>
+
+    <a href="{% url 'inicio' %}" class="btn btn-secondary mt-3">Volver al inicio</a>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detalle del Repuesto{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Detalle del Repuesto</h2>
+
+<div class="card shadow mx-auto" style="max-width: 700px;">
+    <div class="row g-0">
+
+        <!-- IMAGEN -->
+        <div class="col-md-4">
+            {% if repuesto.imagen %}
+                <img src="{{ repuesto.imagen.url }}" class="img-fluid rounded-start" alt="Imagen del repuesto">
+            {% else %}
+                <img src="{% static 'img/no-image.png' %}" class="img-fluid rounded-start" alt="Sin imagen">
+            {% endif %}
+        </div>
+
+        <!-- INFORMACIÓN -->
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title">{{ repuesto.nombre }}</h4>
+
+                <p class="card-text">
+                    <strong>Marca:</strong> {{ repuesto.marca }} <br>
+                    <strong>Precio:</strong> ${{ repuesto.precio }} <br>
+                    <strong>Stock:</strong> {{ repuesto.stock }} <br>
+                    <strong>Código:</strong> {{ repuesto.codigo }} <br>
+                    <strong>Fecha de ingreso:</strong> {{ repuesto.fecha_ingreso }} <br>
+                </p>
+
+                <p class="card-text">
+                    <strong>Descripción:</strong><br>
+                    {{ repuesto.descripcion }}
+                </p>
+
+                <a href="{% url 'repuesto_list' %}" class="btn btn-secondary mt-3">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

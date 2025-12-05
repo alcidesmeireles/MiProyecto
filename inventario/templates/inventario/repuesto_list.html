@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Listado de Repuestos</h1>
+        <a href="{% url 'repuesto_create' %}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Crear Repuesto
+        </a>
+    </div>
+
+    <!-- BUSCADOR -->
+    <form method="GET" class="input-group mb-4">
+        <input type="text" name="q" class="form-control" placeholder="Buscar por nombre o código..." value="{{ request.GET.q }}">
+        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+    </form>
+
+    <!-- TABLA -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Código</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th style="width: 180px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in repuestos %}
+                        <tr>
+                            <td>{{ r.id }}</td>
+                            <td>{{ r.nombre }}</td>
+                            <td>{{ r.codigo }}</td>
+                            <td>${{ r.precio }}</td>
+                            <td>{{ r.categoria }}</td>
+                            <td>
+                                <a href="{% url 'repuesto_detail' r.id %}" class="btn btn-sm btn-info text-white">
+                                    Ver
+                                </a>
+                                <a href="{% url 'repuesto_update' r.id %}" class="btn btn-sm btn-warning">
+                                    Editar
+                                </a>
+                                <a href="{% url 'repuesto_delete' r.id %}" class="btn btn-sm btn-danger">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                No se encontraron repuestos.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

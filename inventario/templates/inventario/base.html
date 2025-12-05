@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>{% block title %}Repuestos Autos{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <h1>Administración de Repuestos de Autos</h1>
-        <nav>
-            <a href="{% url 'inicio' %}">Inicio</a> |
-            <a href="{% url 'agregar_marca' %}">Agregar Marca</a> |
-            <a href="{% url 'agregar_repuesto' %}">Agregar Repuesto</a> |
-            <a href="{% url 'agregar_cliente' %}">Agregar Cliente</a> |
-            <a href="{% url 'buscar_repuesto' %}">Buscar Repuesto</a>
-        </nav>
-        <hr>
-    </header>
+<header>
+    <h1>Repuestos Autos</h1>
+    <nav>
+        <a href="{% url 'inicio' %}">Home</a> |
+        <a href="{% url 'repuesto_list' %}">Repuestos</a> |
+        <a href="{% url 'about' %}">About</a> |
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Perfil</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </nav>
+    <hr>
+</header>
 
-    {% block contenido %}
-    {% endblock %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% block content %}{% endblock %}
 </body>
 </html>
