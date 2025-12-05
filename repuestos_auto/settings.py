@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -123,8 +124,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -136,7 +135,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'templates')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

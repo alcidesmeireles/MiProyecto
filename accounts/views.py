@@ -21,15 +21,27 @@ def signup(request):
 class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
-# Logout
+
+# LOGOUT
 class UserLogoutView(LogoutView):
     next_page = 'login'
-    http_method_names = ['get', 'post']
+
+    def dispatch(self, request, *args, **kwargs):
+        # Forzar logout directo sin template
+        if request.method == "GET":
+            return self.post(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
+
+
+
+
+
 
 # Profile view
 @login_required
 def profile_view(request):
     return render(request, 'accounts/profile.html')
+
 
 # Profile edit
 @login_required
@@ -42,6 +54,7 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'accounts/edit_profile.html', {'form': form})
+
 
 # Change password
 class UserPasswordChangeView(PasswordChangeView):
