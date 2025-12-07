@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ view.object.pk|default:"Nueva Marca" }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="btn btn-success" type="submit">Guardar</button>
+    <a href="{% url 'marca_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

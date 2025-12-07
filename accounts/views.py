@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from .forms import SignUpForm, ProfileForm
 from django.contrib.auth import login
+from django.contrib import messages  
 
 # Signup
 def signup(request):
@@ -12,10 +13,15 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, "Cuenta creada correctamente.")
             return redirect('profile')
+        else:
+            messages.error(request, "Corrige los errores del formulario.")
     else:
         form = SignUpForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+
+    return render(request, 'accounts/signup.html', {"form": form})
+
 
 # Login
 class UserLoginView(LoginView):

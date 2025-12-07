@@ -1,25 +1,70 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load static %}
 
-{% block contenido %}
-<div class="container mt-5" style="max-width: 600px;">
-    <div class="card shadow">
-        <div class="card-body">
+{% block title %}Editar perfil{% endblock %}
 
-            <h3 class="text-center mb-4">Editar Perfil</h3>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
 
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|crispy }}
+        <h2 class="mb-4 text-center">Editar Perfil</h2>
 
-                <button type="submit" class="btn btn-primary w-100 mt-3">Guardar Cambios</button>
-            </form>
+        <div class="card shadow-sm">
+            <div class="card-body">
 
-            <div class="text-center mt-3">
-                <a href="{% url 'profile' %}">Volver al Perfil</a>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Avatar actual -->
+                    {% if user.profile.avatar %}
+                        <div class="text-center mb-3">
+                            <img src="{{ user.profile.avatar.url }}" 
+                                 class="rounded-circle shadow" 
+                                 width="140" height="140" 
+                                 style="object-fit: cover;">
+                        </div>
+                    {% endif %}
+
+                    <!-- Campo Avatar -->
+                    <div class="mb-3">
+                        <label class="form-label">Cambiar avatar</label>
+                        {{ form.avatar }}
+                    </div>
+
+                    <!-- Campo Bio -->
+                    <div class="mb-3">
+                        <label class="form-label">Biografía</label>
+                        {{ form.bio }}
+                    </div>
+
+                    <!-- Campo Link -->
+                    <div class="mb-3">
+                        <label class="form-label">Link personal</label>
+                        {{ form.link }}
+                    </div>
+
+                    <!-- Campo Fecha de nacimiento -->
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de nacimiento</label>
+                        {{ form.birth_date }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Guardar cambios
+                    </button>
+
+                </form>
+
             </div>
-
         </div>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'password_change' %}">
+                Cambiar contraseña
+            </a>
+        </div>
+
     </div>
 </div>
 {% endblock %}
+
