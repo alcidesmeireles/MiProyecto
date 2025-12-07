@@ -99,8 +99,6 @@ Marca
 
 Repuesto
 
-Cliente
-
 Profile
 
 -- Instalación y configuración
